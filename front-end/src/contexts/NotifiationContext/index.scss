@@ -1,0 +1,27 @@
+body {
+  position: relative;
+}
+
+.notification {
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  bottom: 10px;
+  min-width: 30rem;
+  width: -moz-fit-content;
+  width: fit-content !important;
+  height: fit-content;
+
+  margin-right: 0;
+
+  transform: translate(-50%);
+}
+
+.bx--inline-loading__text {
+  color: white !important;
+}
+
+
+.bx--toast-notification {
+  z-index: 9999999 !important;
+}

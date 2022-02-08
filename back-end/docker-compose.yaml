@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  upload-service:
+    image: test/upload-service:latest
+    env_file:
+      - .env
+    container_name: upload-service
+    ports:
+      - 82:9080
+    networks:
+      - network_default
+networks:
+  network_default:
+    external: true
