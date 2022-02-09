@@ -1,5 +1,3 @@
 .build_image
 target
 .env
-
-application.properties
