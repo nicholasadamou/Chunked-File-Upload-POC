@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 APPLICATION_PROPERTIES="src/main/resources/application.properties"

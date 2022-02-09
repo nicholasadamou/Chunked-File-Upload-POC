@@ -12,7 +12,7 @@ BUILD_ENV_TARGET ?= test
 .PHONY: all
 all: clean-war build
 
-# Build Targets-
+# Build Targets
 
 .PHONY: build
 build: target/$(ARTIFACT_NAME).jar .build_image
@@ -24,7 +24,7 @@ war: target/$(ARTIFACT_NAME).jar
 # and build without always triggering builds.
 #
 target/$(ARTIFACT_NAME).jar: pom.xml src
-	mvn  -DenvTarget=$(BUILD_ENV_TARGET) -e -U package -P docker
+	mvn -DenvTarget=$(BUILD_ENV_TARGET) -e -U package -P docker
 
 
 .PHONY: image
@@ -54,10 +54,6 @@ clean-image:
 	-docker rm $(CONTAINER_NAME)
 	-docker rmi $(DOCKER_IMAGE_NAME)
 	-rm -rf .build_image
-
-.PHONY: clean-cache
-clean-cache:
-	rm -rf ~/.m2/repository/com/ibm/glui
 
 # Push Commands
 

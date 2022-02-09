@@ -1,5 +1,5 @@
 {
-	"name": "carbon-kickstarter",
+	"name": "front-end",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -10,8 +10,8 @@
 		"@carbon/layout": "10.35.0",
 		"@carbon/type": "10.40.0",
 		"@carbon/upgrade": "^10.16.0",
-		"carbon-components": "10.51.0",
-		"carbon-components-react": "7.51.0",
+		"carbon-components": "10.52.0",
+		"carbon-components-react": "7.52.0",
 		"carbon-icons": "^7.0.7",
 		"http-proxy-middleware": "^2.0.2",
 		"pako": "^2.0.4",
@@ -19,9 +19,7 @@
 		"react-dom": "17.0.2",
 		"react-scripts": "5.0.0",
 		"sass": "^1.49.0",
-		"styled-components": "5.3.3",
-		"universal-cookie": "^4.0.4",
-		"uuid": "^8.3.2"
+		"styled-components": "5.3.3"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -29,6 +27,7 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"update": "npx yarn-check -u",
+	  	"carbon:upgrade": "npx @carbon/upgrade -d",
 		"clean": "sudo rm -rf node_modules package-lock.json yarn.lock"
 	},
 	"eslintConfig": {

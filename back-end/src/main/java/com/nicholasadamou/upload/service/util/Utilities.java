@@ -6,14 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileOutputStream;
 import java.util.Objects;
 
-/**
- * Licensed Materials - Property of IBM
- * <p>
- * (C) Copyright IBM Corp. 2022. All Rights Reserved.
- * <p>
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
- */
 @Component
 public class Utilities {
 	public boolean isFileUploadCompleted(String contentRange) {

@@ -9,14 +9,6 @@ import java.io.File;
 import java.util.Date;
 import java.util.Objects;
 
-/**
- * Licensed Materials - Property of IBM
- * <p>
- * (C) Copyright IBM Corp. 2022. All Rights Reserved.
- * <p>
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
- */
 @Component
 // https://spring.io/guides/gs/scheduling-tasks/
 public class Jobs {

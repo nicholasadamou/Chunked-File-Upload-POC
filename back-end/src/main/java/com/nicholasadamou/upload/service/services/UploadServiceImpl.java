@@ -10,14 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.ws.rs.core.Response;
 
-/**
- * Licensed Materials - Property of IBM
- * <p>
- * (C) Copyright IBM Corp. 2022. All Rights Reserved.
- * <p>
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
- */
 @Component
 public class UploadServiceImpl implements UploadService {
 	Logger logger = LoggerFactory.getLogger(UploadServiceImpl.class);

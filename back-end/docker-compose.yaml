@@ -8,8 +8,3 @@ services:
     container_name: upload-service
     ports:
       - 82:9080
-    networks:
-      - network_default
-networks:
-  network_default:
-    external: true

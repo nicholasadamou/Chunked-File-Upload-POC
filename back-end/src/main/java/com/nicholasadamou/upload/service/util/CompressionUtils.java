@@ -7,14 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.GZIPInputStream;
 
-/**
- * Licensed Materials - Property of IBM
- * <p>
- * (C) Copyright IBM Corp. 2022. All Rights Reserved.
- * <p>
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
- */
 @Component
 public class CompressionUtils
 {

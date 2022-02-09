@@ -1,13 +1,5 @@
 package com.nicholasadamou.upload.service.model;
 
-/**
- * Licensed Materials - Property of IBM
- * <p>
- * (C) Copyright IBM Corp. 2022. All Rights Reserved.
- * <p>
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
- */
 public class FilePayload {
 	private String fileName;
 	private String fileType;

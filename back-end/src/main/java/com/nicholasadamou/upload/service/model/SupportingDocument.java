@@ -5,14 +5,6 @@ import org.apache.tomcat.util.codec.binary.Base64;
 
 import java.util.Arrays;
 
-/**
- * Licensed Materials - Property of IBM
- * <p>
- * (C) Copyright IBM Corp. 2022. All Rights Reserved.
- * <p>
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
- */
 public class SupportingDocument {
 	private FilePayload filePayload;
 	private String fileName;
