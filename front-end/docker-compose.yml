@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  front-end:
+    container_name: front-end
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - 3001:3000

@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  front-end-prod:
+    container_name: front-end-prod
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "1337:80"
