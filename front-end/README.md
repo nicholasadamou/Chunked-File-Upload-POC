@@ -45,7 +45,7 @@ This project uses the following technologies:
 
 - [**React.js**](https://reactjs.org/) - For building the interface along with:
 	- [**Styled-Components**](https://www.styled-components.com/) - for styling.
-	- [**carbon-components-react**](https://npmjs.com/package/carbon-components-react)
+	- [**carbon-components-react**](https://npmjs.com/package/carbon-components-react) - for the base design system.
 
 ## License
 
