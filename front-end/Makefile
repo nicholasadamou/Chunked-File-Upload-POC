@@ -1,25 +1,33 @@
-REPO ?= test/front-end
-GITSHA=$(shell git rev-parse --short HEAD)
-TAG_COMMIT=$(REPO):$(GITSHA)
+DOCKER_IMAGE ?= test/front-end
+DOCKER_TAG ?= latest
+DOCKER_IMAGE_NAME ?= $(DOCKER_IMAGE):$(DOCKER_TAG)
+CONTAINER_NAME ?= front-end
+COMMIT ?= 00000000
+PROP ?= test
 
-all: build-dev
+.PHONY: help
 
-.PHONY: build-dev
-build-dev:
-	docker build -f Dockerfile -t $(REPO):dev .
+.PHONY: all
+all: build
 
-.PHONY: build-prod
-build-prod:
-	docker build -f Dockerfile.prod -t $(REPO):prod .
+help: ## This help.
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-.PHONY: start-dev-container
-start-dev-container:
-	docker-compose -f docker-compose.yml up --remove-orphans
+.DEFAULT_GOAL := help
 
-.PHONY: start-prod-container
-start-prod-container:
-	docker-compose -f docker-compose.prod.yml up --remove-orphans
+.PHONY: install
+install:
+	npm install
 
-.PHONY: dev
-dev:
-	yarn start
+.PHONY: serve
+serve: package.json node_modules
+	npm run start
+
+.PHONY: build
+build: ## build the container
+	docker build -t $(DOCKER_IMAGE_NAME) .
+
+# Start Command
+start: .build_image
+	docker run -d --name $(CONTAINER_NAME) \
+			$(DOCKER_IMAGE_NAME)

@@ -9,8 +9,8 @@ services:
     ports:
       - 82:8080
     networks:
-      - test
+      - chunked-file-upload-poc
 networks:
-  test:
-    name: test
+  chunked-file-upload-poc:
+    name: chunked-file-upload-poc
     external: true

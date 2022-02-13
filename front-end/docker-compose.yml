@@ -6,14 +6,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      - UPLOAD_SERVICE_HOST=http://upload-service
+      - UPLOAD_SERVICE_PORT=8080
     volumes:
       - ".:/app"
-      - "/app/node_modules"
+      - "/opt/app/node_modules"
     ports:
       - 3001:3000
     networks:
-      - test
+      - chunked-file-upload-poc
 networks:
-  test:
-    name: test
+  chunked-file-upload-poc:
+    name: chunked-file-upload-poc
     external: true
