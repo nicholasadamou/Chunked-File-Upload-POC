@@ -2,10 +2,24 @@
 
 Handles the compression and chunking of a file that is passed to the file uploader component.
 
+The file is chunked utilizing the [ChunkedFile.js](src/components/ChunkedFile.js) in the form of Multipart Form Data. Within each chunk is a base64 encoded file name. Contained within this encoded file name is the JSON:
+
+```json
+{
+ "fileName": "<original name>.<extension>",
+ "fileType": "<MIMIE type of file>",
+ "originalFileName": "<original file name>",
+ "originalFileExtension": "<original file extension>"
+}
+```
+
+This data is decoded and used internally in the back-end for handling the building and decompressing of the uploaded file.
+
 ## Development
 
 ### Requirements
 
+- [Docker](http://docker.com/)
 - [Node.js](https://nodejs.org/en/)
 - [Yarn](https://yarnpkg.com/en/) (recommended)
 
@@ -16,6 +30,8 @@ Run the live-reload server on <http://localhost:3000>
 ```bash
 make dev
 ```
+
+Please take a look at [src/setupProxy.js](src/setupProxy.js) to see how the proxy is set up.
 
 ## Docker
 
@@ -44,8 +60,8 @@ This project uses the following technologies:
 **The Front-End**:
 
 - [**React.js**](https://reactjs.org/) - For building the interface along with:
-	- [**Styled-Components**](https://www.styled-components.com/) - for styling.
-	- [**carbon-components-react**](https://npmjs.com/package/carbon-components-react) - for the base design system.
+  - [**Styled-Components**](https://www.styled-components.com/) - for styling.
+  - [**carbon-components-react**](https://npmjs.com/package/carbon-components-react) - for the base design system.
 
 ## License
 

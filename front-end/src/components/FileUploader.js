@@ -9,7 +9,7 @@ import PakoWorker from '../workers/pako.worker';
 
 import {NotificationContext} from '../contexts/NotifiationContext/NotificationContext';
 
-import SupportingDocument from './SupportingDocument';
+import ChunkedFile from './ChunkedFile';
 
 import { toUint8Array } from '../utilities';
 
@@ -174,7 +174,7 @@ const FileUploader = (props) => {
 	}
 
 	const upload = async (file, fileName, blob) => {
-		const document = new SupportingDocument(file, blob);
+		const document = new ChunkedFile(file, blob);
 
 		showNotification({
 			success: true,
@@ -217,7 +217,7 @@ const FileUploader = (props) => {
 			<strong>Add a file by drag and drop or browse</strong>
 			<p>If you have multiple files, it is recommended to zip them together.</p>
 			<FileUploaderDropContainer
-				id="supporting-documentation-file-uploader"
+				id="file-uploader"
 				labelText="Choose a file or drag and drop it here"
 				onAddFiles={handleOnDragNDrop}
 				accept={validTypes}

@@ -5,23 +5,23 @@ import org.apache.tomcat.util.codec.binary.Base64;
 
 import java.util.Arrays;
 
-public class SupportingDocument {
+public class ChunkedFile {
 	private FilePayload filePayload;
 	private String fileName;
 	private String fileType;
 	private byte[] data;
 
-	public SupportingDocument() {
+	public ChunkedFile() {
 	}
 
-	public SupportingDocument(FilePayload filePayload) {
+	public ChunkedFile(FilePayload filePayload) {
 		this.filePayload = filePayload;
 
 		this.fileName = filePayload.getFileName();
 		this.fileType = filePayload.getFileType();
 	}
 
-	public SupportingDocument(FilePayload filePayload, String fileName, String fileType, byte[] data) {
+	public ChunkedFile(FilePayload filePayload, String fileName, String fileType, byte[] data) {
 		this.filePayload = filePayload;
 		this.fileName = fileName;
 		this.fileType = fileType;
@@ -64,7 +64,7 @@ public class SupportingDocument {
 		return fileType.equals("application/gzip");
 	}
 
-	public static SupportingDocument constructFromBase64(String base64) {
+	public static ChunkedFile constructFromBase64(String base64) {
 		String decoded = new String(Base64.decodeBase64(base64.getBytes()));
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -77,12 +77,12 @@ public class SupportingDocument {
 			e.printStackTrace();
 		}
 
-		return new SupportingDocument(filePayload);
+		return new ChunkedFile(filePayload);
 	}
 
 	@Override
 	public String toString() {
-		return "SupportingDocument{" +
+		return "ChunkedFile{" +
 				"filePayload=" + filePayload +
 				", fileName='" + fileName + '\'' +
 				", fileType='" + fileType + '\'' +

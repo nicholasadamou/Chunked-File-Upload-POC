@@ -1,7 +1,7 @@
 package com.nicholasadamou.upload.service.controller;
 
 import com.nicholasadamou.upload.service.model.FilePayload;
-import com.nicholasadamou.upload.service.model.SupportingDocument;
+import com.nicholasadamou.upload.service.model.ChunkedFile;
 import com.nicholasadamou.upload.service.util.CompressionUtils;
 import com.nicholasadamou.upload.service.util.Utilities;
 import org.slf4j.Logger;
@@ -32,12 +32,12 @@ public class UploadController {
 
 		String fileName = file.getOriginalFilename();
 		String base64 = utilities.getFileNameWithoutExtension(fileName);
-		SupportingDocument supportingDocument = SupportingDocument.constructFromBase64(base64);
-		String filePath = TMP_FILE_PATH + supportingDocument.getFileName();
+		ChunkedFile chunkedFile = ChunkedFile.constructFromBase64(base64);
+		String filePath = TMP_FILE_PATH + chunkedFile.getFileName();
 
 		boolean isFileUploaded = utilities.isFileUploadCompleted(contentRange);
 
-		logger.info(String.format("Received %s", supportingDocument));
+		logger.info(String.format("Received %s", chunkedFile));
 		logger.info(String.format("chunkIndex: %d, isFileUploaded: %s", chunkIndex, isFileUploaded));
 
 		if (chunkIndex == 0) {
@@ -52,16 +52,16 @@ public class UploadController {
 			if (didCreateFile) {
 				utilities.appendDataToFile(file, filePath);
 
-				logger.info(String.format("File %s created and chunk index %d appended.", supportingDocument.getFileName(), chunkIndex));
+				logger.info(String.format("File %s created and chunk index %d appended.", chunkedFile.getFileName(), chunkIndex));
 			} else {
-				logger.info(String.format("Creating file failed due to file %s already exists.", supportingDocument.getFileName()));
-				logger.info(String.format("Attempting to delete file %s.", supportingDocument.getFileName()));
+				logger.info(String.format("Creating file failed due to file %s already exists.", chunkedFile.getFileName()));
+				logger.info(String.format("Attempting to delete file %s.", chunkedFile.getFileName()));
 
 				File document = new File(filePath);
 
 				if (document.delete()) {
-					logger.info(String.format("File %s deleted.", supportingDocument.getFileName()));
-					logger.info(String.format("Creating file %s at %s.", supportingDocument.getFileName(), filePath));
+					logger.info(String.format("File %s deleted.", chunkedFile.getFileName()));
+					logger.info(String.format("Creating file %s at %s.", chunkedFile.getFileName(), filePath));
 
 					try {
 						didCreateFile = new File(filePath).createNewFile();
@@ -72,7 +72,7 @@ public class UploadController {
 					if (didCreateFile) {
 						utilities.appendDataToFile(file, filePath);
 
-						logger.info(String.format("File %s created and chunk index %d appended.", supportingDocument.getFileName(), chunkIndex));
+						logger.info(String.format("File %s created and chunk index %d appended.", chunkedFile.getFileName(), chunkIndex));
 					} else {
 						return Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
 					}
@@ -89,8 +89,8 @@ public class UploadController {
 
 			File document = Paths.get(filePath).toFile();
 
-			if (supportingDocument.isCompressed()) {
-				return handleCompressedDocument(supportingDocument, document);
+			if (chunkedFile.isCompressed()) {
+				return handleCompressedDocument(chunkedFile, document);
 			}
 
 			if (document.delete()) {
@@ -103,18 +103,18 @@ public class UploadController {
 		return Response.Status.PARTIAL_CONTENT.getStatusCode();
 	}
 
-	private int handleCompressedDocument(SupportingDocument supportingDocument, File sourceFile) {
-		logger.info(String.format("File %s is compressed.", supportingDocument.getFileName()));
-		logger.info(String.format("Attempting to decompress file %s.", supportingDocument.getFileName()));
+	private int handleCompressedDocument(ChunkedFile chunkedFile, File sourceFile) {
+		logger.info(String.format("File %s is compressed.", chunkedFile.getFileName()));
+		logger.info(String.format("Attempting to decompress file %s.", chunkedFile.getFileName()));
 
-		FilePayload filePayload = supportingDocument.getFilePayload();
+		FilePayload filePayload = chunkedFile.getFilePayload();
 		String filePath = "/tmp/" + filePayload.getOriginalFileName();
 		File targetFile = Paths.get(filePath).toFile();
 
 		try {
 			compressionUtils.decompress(sourceFile.toPath().toString(), targetFile.toPath().toString());
 		} catch (IOException e) {
-			logger.info(String.format("File %s failed to decompress. %s", supportingDocument.getFileName(), e));
+			logger.info(String.format("File %s failed to decompress. %s", chunkedFile.getFileName(), e));
 
 			e.printStackTrace();
 
@@ -130,11 +130,11 @@ public class UploadController {
 		logger.info("Attempting to delete both compressed and uncompressed files.");
 
 		if (sourceFile.delete() && targetFile.delete()) {
-			logger.info(String.format("File %s and %s were deleted.", "/tmp/" + supportingDocument.getFileName(), filePath));
+			logger.info(String.format("File %s and %s were deleted.", "/tmp/" + chunkedFile.getFileName(), filePath));
 
 			return Response.Status.OK.getStatusCode();
 		} else {
-			logger.info(String.format("File %s and %s failed to be deleted.", "/tmp/" + supportingDocument.getFileName(), filePath));
+			logger.info(String.format("File %s and %s failed to be deleted.", "/tmp/" + chunkedFile.getFileName(), filePath));
 
 			return Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
 		}

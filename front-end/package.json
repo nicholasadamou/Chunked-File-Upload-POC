@@ -1,42 +1,41 @@
 {
-	"name": "front-end",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@carbon/colors": "10.35.0",
-		"@carbon/grid": "10.40.0",
-		"@carbon/icons": "10.45.0",
-		"@carbon/icons-react": "10.45.0",
-		"@carbon/layout": "10.35.0",
-		"@carbon/type": "10.40.0",
-		"@carbon/upgrade": "^10.16.0",
-		"carbon-components": "10.52.0",
-		"carbon-components-react": "7.52.0",
-		"carbon-icons": "^7.0.7",
-		"http-proxy-middleware": "^2.0.2",
-		"pako": "^2.0.4",
-		"react": "17.0.2",
-		"react-dom": "17.0.2",
-		"react-scripts": "5.0.0",
-		"sass": "^1.49.0",
-		"styled-components": "5.3.3"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"update": "npx yarn-check -u",
-	  	"carbon:upgrade": "npx @carbon/upgrade -d",
-		"clean": "sudo rm -rf node_modules package-lock.json yarn.lock"
-	},
-	"eslintConfig": {
-		"extends": "react-app"
-	},
-	"browserslist": [
-		">0.2%",
-		"not dead",
-		"not ie <= 11",
-		"not op_mini all"
-	]
+    "name": "front-end",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@carbon/colors": "10.35.0",
+        "@carbon/grid": "10.40.0",
+        "@carbon/icons": "10.45.0",
+        "@carbon/icons-react": "10.45.0",
+        "@carbon/layout": "10.35.0",
+        "@carbon/type": "10.40.0",
+        "@carbon/upgrade": "^10.16.0",
+        "carbon-components": "10.52.0",
+        "carbon-components-react": "7.52.0",
+        "carbon-icons": "^7.0.7",
+        "http-proxy-middleware": "^2.0.2",
+        "react": "17.0.2",
+        "react-dom": "17.0.2",
+        "react-scripts": "5.0.0",
+        "sass": "^1.49.0",
+        "styled-components": "5.3.3"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "update": "npx yarn-check -u",
+        "carbon:upgrade": "npx @carbon/upgrade -d",
+        "clean": "sudo rm -rf node_modules package-lock.json yarn.lock"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ]
 }

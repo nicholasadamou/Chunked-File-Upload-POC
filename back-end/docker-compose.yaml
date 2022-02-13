@@ -1,4 +1,4 @@
-version: '2'
+version: '3.7'
 
 services:
   upload-service:
@@ -7,4 +7,10 @@ services:
       - .env
     container_name: upload-service
     ports:
-      - 82:9080
+      - 82:8080
+    networks:
+      - test
+networks:
+  test:
+    name: test
+    external: true

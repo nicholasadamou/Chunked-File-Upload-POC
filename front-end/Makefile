@@ -2,7 +2,7 @@ REPO ?= test/front-end
 GITSHA=$(shell git rev-parse --short HEAD)
 TAG_COMMIT=$(REPO):$(GITSHA)
 
-all: dev
+all: build-dev
 
 .PHONY: build-dev
 build-dev:

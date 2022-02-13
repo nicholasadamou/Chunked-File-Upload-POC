@@ -1,7 +1,7 @@
 import { fileToChunkedBlob } from '../utilities';
 
 // See https://www.eventslooped.com/posts/chunked-file-upload-typescript-react-go/
-class SupportingDocument {
+class ChunkedFile {
 	static chunkSize = 500000; // 0.5MB
 	static uploadURL = '/api/upload';
 
@@ -20,11 +20,11 @@ class SupportingDocument {
 		this.blob = blob;
 
 		this.currentChunkStartByte = 0;
-		this.currentChunkFinalByte = SupportingDocument.chunkSize > this.file.size ? this.file.size : SupportingDocument.chunkSize;
+		this.currentChunkFinalByte = ChunkedFile.chunkSize > this.file.size ? this.file.size : ChunkedFile.chunkSize;
 	}
 
 	upload = async (onSuccess: function, onError: function, chunkIndex = 0) => {
-		this.request.open('POST', SupportingDocument.uploadURL + `?chunkIndex=${chunkIndex}`, true);
+		this.request.open('POST', ChunkedFile.uploadURL + `?chunkIndex=${chunkIndex}`, true);
 
 		let chunk: Blob = await fileToChunkedBlob(this.file, this.currentChunkStartByte, this.currentChunkFinalByte);
 
@@ -47,12 +47,12 @@ class SupportingDocument {
 				onSuccess();
 
 				return;
-			} else if (remainingBytes < SupportingDocument.chunkSize) {
+			} else if (remainingBytes < ChunkedFile.chunkSize) {
 				this.currentChunkStartByte = this.currentChunkFinalByte;
 				this.currentChunkFinalByte = this.currentChunkStartByte + remainingBytes;
 			} else {
 				this.currentChunkStartByte = this.currentChunkFinalByte;
-				this.currentChunkFinalByte = this.currentChunkStartByte + SupportingDocument.chunkSize;
+				this.currentChunkFinalByte = this.currentChunkStartByte + ChunkedFile.chunkSize;
 			}
 
 			this.upload(onSuccess, onError, ++chunkIndex);
@@ -64,4 +64,4 @@ class SupportingDocument {
 	}
 }
 
-export default SupportingDocument;
+export default ChunkedFile;
