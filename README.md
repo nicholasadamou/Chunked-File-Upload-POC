@@ -16,7 +16,7 @@ I also highly recommend [WebStorm IDE](https://www.jetbrains.com/webstorm/) for 
 
 - [Docker](http://docker.com/)
 - [Node.js](https://nodejs.org/en/)
-- [Yarn](https://yarnpkg.com/en/) (recommended)
+- [Yarn](https://yarnpkg.com/en/)
 - [Maven](https://maven.apache.org/)
 - [Java JDK 8](https://www.oracle.com/java/technologies/downloads/)
 
