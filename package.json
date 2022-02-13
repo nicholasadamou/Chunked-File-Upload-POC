@@ -8,7 +8,7 @@
 		"build": "cd front-end && yarn build && cd ../back-end && make",
 		"clean": "cd front-end && yarn clean && cd ../back-end && make clean",
 		"docker": "bash scripts/docker.sh",
-		"docker:down": "cd front-end && docker-compose down && cd ../back-end && docker-compose down"
+		"docker:down": "cd front-end && docker-compose down && cd ../back-end && docker-compose down && docker network remove test"
 	},
 	"author": "Nicholas Adamou",
 	"license": "MIT",

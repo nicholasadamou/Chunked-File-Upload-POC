@@ -91,11 +91,19 @@ public class UploadController {
 
 			if (chunkedFile.isCompressed()) {
 				return handleCompressedDocument(chunkedFile, document);
+			} else {
+				logger.info("File is not compressed.");
 			}
 
+			logger.info(String.format("Attempting to delete %s.", filePath));
+
 			if (document.delete()) {
+				logger.info(String.format("File %s was deleted.", filePath));
+
 				return Response.Status.OK.getStatusCode();
 			} else {
+				logger.info(String.format("File %s failed to be deleted.", filePath));
+
 				return Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
 			}
 		}
@@ -114,7 +122,7 @@ public class UploadController {
 		try {
 			compressionUtils.decompress(sourceFile.toPath().toString(), targetFile.toPath().toString());
 		} catch (IOException e) {
-			logger.info(String.format("File %s failed to decompress. %s", chunkedFile.getFileName(), e));
+			logger.info(String.format("File %s failed to decompress. Attempting to delete the uncompressed file. %s", chunkedFile.getFileName(), e));
 
 			e.printStackTrace();
 
