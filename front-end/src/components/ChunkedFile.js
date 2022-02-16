@@ -31,7 +31,8 @@ class ChunkedFile {
 		this.request.setRequestHeader('Content-Range', `bytes ${this.currentChunkStartByte}-${this.currentChunkFinalByte}/${this.file.size}`);
 
 		this.request.onload = () => {
-			const status = this.request.status;
+			const response = JSON.parse(this.request.response);
+			const {status} = response;
 
 			if (status > 400) {
 				onError(this.request);
