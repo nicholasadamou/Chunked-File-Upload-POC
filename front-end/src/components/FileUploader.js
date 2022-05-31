@@ -153,7 +153,7 @@ const FileUploader = (props) => {
 			originalFileExtension,
 		};
 
-		const encodedFileName = `${btoa(JSON.stringify(fileAsJSON))}.${extension}`;
+		const encodedFileName = `${Buffer.from(JSON.stringify(FileAsJSON).toString('base64')}.${extension}`;
 
 		setFile({
 			name: fileName,
