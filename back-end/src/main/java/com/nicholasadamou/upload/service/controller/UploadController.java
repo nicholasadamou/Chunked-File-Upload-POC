@@ -27,9 +27,9 @@ public class UploadController {
 	@Autowired
 	private Utilities utilities;
 
-	public int buildFile(MultipartFile file, String contentRange, int chunkIndex) {
-		final String TMP_FILE_PATH = "/tmp/";
+	private final String TMP_FILE_PATH = "/tmp/";
 
+	public int buildFile(MultipartFile file, String contentRange, int chunkIndex) {
 		String fileName = file.getOriginalFilename();
 		String base64 = utilities.getFileNameWithoutExtension(fileName);
 		ChunkedFile chunkedFile = ChunkedFile.constructFromBase64(base64);
@@ -116,7 +116,7 @@ public class UploadController {
 		logger.info(String.format("Attempting to decompress file %s.", chunkedFile.getFileName()));
 
 		FilePayload filePayload = chunkedFile.getFilePayload();
-		String filePath = "/tmp/" + filePayload.getOriginalFileName();
+		String filePath = TMP_FILE_PATH + filePayload.getOriginalFileName();
 		File targetFile = Paths.get(filePath).toFile();
 
 		try {
@@ -138,11 +138,11 @@ public class UploadController {
 		logger.info("Attempting to delete both compressed and uncompressed files.");
 
 		if (sourceFile.delete() && targetFile.delete()) {
-			logger.info(String.format("File %s and %s were deleted.", "/tmp/" + chunkedFile.getFileName(), filePath));
+			logger.info(String.format("File %s and %s were deleted.", TMP_FILE_PATH + chunkedFile.getFileName(), filePath));
 
 			return Response.Status.OK.getStatusCode();
 		} else {
-			logger.info(String.format("File %s and %s failed to be deleted.", "/tmp/" + chunkedFile.getFileName(), filePath));
+			logger.info(String.format("File %s and %s failed to be deleted.", TMP_FILE_PATH + chunkedFile.getFileName(), filePath));
 
 			return Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
 		}

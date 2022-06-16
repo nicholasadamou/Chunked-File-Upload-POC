@@ -9,7 +9,9 @@ if [ "$1" != "down" ]; then
 
 	for project in "${PROJECTS[@]}"; do
 		cd "$project" && {
-			make all && docker-compose up -d
+			docker-compose down --remove-orphans
+			docker-compose build
+			dock-compose up -d
 			cd .. || exit
 		}
 	done
@@ -18,7 +20,7 @@ else
 
 	for project in "${PROJECTS[@]}"; do
 		cd "$project" && {
-			docker-compose down
+			docker-compose down --remove-orphans
 			cd .. || exit
 		}
 	done
