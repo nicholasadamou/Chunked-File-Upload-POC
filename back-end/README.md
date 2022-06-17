@@ -58,18 +58,16 @@ CORS_ALLOWED_ORIGINS=
 PORT=8080
 ```
 
-Run [`convert_env_to_application_properties.sh`](devops/convert_env_to_application_properties.sh).
-
-This will prompt you for a port you would like to use. If you do not provide a port, it will select one automatically.
+Install dependencies.
 
 ```bash
-bash devops/convert_env_to_application_properties.sh
+mvn dependency:go-offline
 ```
 
 Build the `UploadService.jar` file.
 
 ```bash
-make
+mvn -e -U package -P docker 
 ```
 
 Start the `UploadService.jar` file.
@@ -83,13 +81,13 @@ java -jar target/UploadService.jar
 To build the docker image for Upload Service, run the following command.
 
 ```bash
-make image
+docker-compose build
 ```
 
 Then to execute the docker container, run the following command.
 
 ```bash
-docker-compose up
+docker-compose up -d
 ```
 
 ## License
