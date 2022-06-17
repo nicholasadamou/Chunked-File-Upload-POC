@@ -50,9 +50,12 @@ Utilizes a [scheduled task](src/main/java/com/nicholasadamou/upload/service/job/
 Create a `.env` file with the following properties using the [`env.example`](env.example) as an example:
 
 ```
-SPRING_SERVLET_MULTIPART_maxFileSize=128MB
-SPRING_SERVLET_MULTIPART_maxRequestSize=128MB
-SPRING_SERVLET_MULTIPART_ENABLED=true
+MAX_FILE_SIZE=10MB
+MAX_REQUEST_SIZE=100MB
+
+CORS_ALLOWED_ORIGINS=
+
+PORT=8080
 ```
 
 Run [`convert_env_to_application_properties.sh`](devops/convert_env_to_application_properties.sh).
