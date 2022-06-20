@@ -83,18 +83,16 @@ const FileUploader = (props) => {
     const isFileSizeValid = (file) => file.size <= 6000000;
 
     const handleWorker = async (file, message) => {
-        let fileNameParts = file.name.split('.');
+		let mid = file.name.lastIndexOf('.');
+		let name = file.name.substr(0, mid);
+		const originalExtension = file.name.substr(mid + 1, file.name.length);
+		const originalFileName = `${name}.${originalExtension}`;
 
-        let name = fileNameParts[0];
-        const originalExtension = fileNameParts[1];
-        const originalFileName = `${name}.${originalExtension}`;
+		const type = 'application/gzip';
+		const extension = `${originalExtension}.gz`;
 
-        name = `${file.name.split('.')[0]}`;
-        const type = 'application/gzip';
-        const extension = `${originalExtension}.gz`;
-
-        const buffer = message.data;
-        const blob = new Blob([buffer], { type });
+		const buffer = message.data;
+		const blob = new Blob([buffer], { type });
 
         await prepareForUpload(
             name,
@@ -140,10 +138,9 @@ const FileUploader = (props) => {
             return;
         }
 
-        let fileNameParts = file.name.split('.');
-
-        let name = fileNameParts[0];
-        const originalExtension = fileNameParts[1];
+        let mid = file.name.lastIndexOf('.');
+        let name = file.name.substr(0, mid);
+        const originalExtension = file.name.substr(mid + 1, file.name.length);
         const originalFileName = `${name}.${originalExtension}`;
         let extension = originalExtension;
 
